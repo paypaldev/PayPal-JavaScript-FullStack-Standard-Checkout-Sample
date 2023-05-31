@@ -1,4 +1,5 @@
 ![PayPal Developer Cover](https://github.com/paypaldev/.github/blob/main/pp-cover.png)
+
 <div align="center">
   <a href="https://twitter.com/paypaldev" target="_blank">
     <img alt="Twitter: PayPal Developer" src="https://img.shields.io/twitter/follow/paypaldev?style=social" />
@@ -18,12 +19,14 @@
 </div>
 
 # PayPal JavasScript (NodeJS) FullStack Standard Checkout
+
 This sample app shows you how to integrate PayPal into your JavasScript app for the [standard checkout(https://developer.paypal.com/docs/checkout/standard/integrate/) workflow.
 
 ## Run this project
 
 ### Frontend
-- Open the `index.html` file in your browser of preference.
+
+- Open the `index.html` and resplace the `test` string in the script tag with your PayPal Client ID.
 
 ### Backend
 
@@ -32,8 +35,9 @@ This sample app shows you how to integrate PayPal into your JavasScript app for 
 - Run `npm start` in your terminal
 
 ## PayPal Developer Community
+
 The PayPal Developer community helps you build your career while improving your products and the developer experience. You’ll be able to contribute code and documentation, meet new people and learn from the open-source community.
- 
-* Website: [developer.paypal.com](https://developer.paypal.com)
-* Twitter: [@paypaldev](https://twitter.com/paypaldev)
-* GitHub:  [@paypal](https://github.com/paypal)
+
+- Website: [developer.paypal.com](https://developer.paypal.com)
+- Twitter: [@paypaldev](https://twitter.com/paypaldev)
+- GitHub: [@paypal](https://github.com/paypal)
