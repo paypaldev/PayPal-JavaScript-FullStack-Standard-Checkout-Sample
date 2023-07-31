@@ -20,11 +20,15 @@
 
 # PayPal JavasScript (NodeJS) FullStack Standard Checkout
 
-This sample app shows you how to integrate PayPal into your JavasScript app for the [standard checkout(https://developer.paypal.com/docs/checkout/standard/integrate/) workflow.
+This sample app shows you how to integrate PayPal into your JavasScript app for the [standard checkout](https://developer.paypal.com/docs/checkout/standard/integrate/) workflow.
 
 ## Run this project
 
 You can run this project locally or inside of [Stackblitz](https://stackblitz.com/edit/paypal-js-standard-checkout-sample).
+
+In your terminal run:
+
+`npm start` and navigate to [http://localhost:9597/](http://localhost:9597/).
 
 ### Frontend
 
