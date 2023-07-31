@@ -1,6 +1,5 @@
 import express from 'express';
 import fetch from 'node-fetch';
-import cors from 'cors';
 import 'dotenv/config';
 import path from 'path';
 const __dirname = path.resolve();
@@ -8,7 +7,6 @@ const __dirname = path.resolve();
 const { CLIENT_ID, APP_SECRET } = process.env;
 const base = 'https://api-m.sandbox.paypal.com';
 const app = express();
-app.use(cors({ origin: '*' }));
 
 const generateAccessToken = async () => {
   try {

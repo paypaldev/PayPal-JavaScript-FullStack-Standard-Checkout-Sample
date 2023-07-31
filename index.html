@@ -28,7 +28,7 @@
             },
             createOrder: async (data, actions) => {
               try {
-                const response = await fetch('http://localhost:9597/orders', {
+                const response = await fetch('/orders', {
                   method: 'POST',
                 });
 
@@ -42,7 +42,7 @@
             onApprove: async (data, actions) => {
               try {
                 const response = await fetch(
-                  `http://localhost:9597/orders/${data.orderID}/capture`,
+                  `/orders/${data.orderID}/capture`,
                   {
                     method: 'POST',
                   }
