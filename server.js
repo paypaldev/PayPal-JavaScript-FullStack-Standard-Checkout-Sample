@@ -10,6 +10,9 @@ const app = express();
 
 const generateAccessToken = async () => {
   try {
+    if (!CLIENT_ID || !APP_SECRET) {
+      throw new Error("MISSING_API_CREDENTIALS");
+    }
     const auth = Buffer.from(CLIENT_ID + ':' + APP_SECRET).toString('base64');
     const response = await fetch(`${base}/v1/oauth2/token`, {
       method: 'post',
