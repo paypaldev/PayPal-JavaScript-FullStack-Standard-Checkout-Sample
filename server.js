@@ -2,7 +2,6 @@ import express from 'express';
 import fetch from 'node-fetch';
 import 'dotenv/config';
 import path from 'path';
-const __dirname = path.resolve();
 
 const { PAYPAL_CLIENT_ID, PAYPAL_APP_SECRET } = process.env;
 const base = 'https://api-m.sandbox.paypal.com';
@@ -103,7 +102,7 @@ app.post('/orders/:orderID/capture', async (req, res) => {
 
 //Serve index.html
 app.get('/', (req, res) => {
-  res.sendFile(`${__dirname}/index.html`);
+  res.sendFile(path.resolve('./index.html'));
 });
 
 app.listen(9597, () => {
