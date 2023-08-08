@@ -7,6 +7,9 @@ const { PAYPAL_CLIENT_ID, PAYPAL_APP_SECRET } = process.env;
 const base = 'https://api-m.sandbox.paypal.com';
 const app = express();
 
+// parse post params sent in body in json format
+app.use(express.json());
+
 const generateAccessToken = async () => {
   try {
     if (!PAYPAL_CLIENT_ID || !PAYPAL_APP_SECRET) {
@@ -28,7 +31,10 @@ const generateAccessToken = async () => {
   }
 };
 
-const createOrder = async () => {
+const createOrder = async (cart) => {
+  // use the cart information passed from the front-end to calculate the purchase unit details
+  console.log('shopping cart information passed from the frontend createOrder() callback:', cart);
+
   const accessToken = await generateAccessToken();
   const url = `${base}/v2/checkout/orders`;
   const payload = {
@@ -55,7 +61,7 @@ const createOrder = async () => {
   return handleResponse(response);
 };
 
-const capturePayment = async (orderID) => {
+const captureOrder = async (orderID) => {
   const accessToken = await generateAccessToken();
   const url = `${base}/v2/checkout/orders/${orderID}/capture`;
 
@@ -79,9 +85,11 @@ async function handleResponse(response) {
   throw new Error(errorMessage);
 }
 
-app.post('/orders', async (req, res) => {
+app.post('/api/orders', async (req, res) => {
   try {
-    const response = await createOrder();
+    // use the cart information passed from the front-end to calculate the order amount detals
+    const { cart } = req.body;
+    const response = await createOrder(cart);
     res.json(response);
   } catch (error) {
     console.error('Failed to create order:', error);
@@ -89,10 +97,10 @@ app.post('/orders', async (req, res) => {
   }
 });
 
-app.post('/orders/:orderID/capture', async (req, res) => {
+app.post('/api/orders/:orderID/capture', async (req, res) => {
   try {
     const { orderID } = req.params;
-    const response = await capturePayment(orderID);
+    const response = await captureOrder(orderID);
     res.json(response);
   } catch (error) {
     console.error('Failed to create order:', error);

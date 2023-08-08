@@ -27,8 +27,19 @@
             },
             createOrder: async (data, actions) => {
               try {
-                const response = await fetch('/orders', {
+                const response = await fetch('/api/orders', {
                   method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  // use the "body" param to optionally pass additional order information
+                  // like product ids and quantities
+                  body: JSON.stringify({
+                    cart: [{
+                      id: 'YOUR_PRODUCT_ID',
+                      quantity: 'YOUR_PRODUCT_QUANTITY',
+                    }]
+                  }),
                 });
 
                 const details = await response.json();
@@ -41,10 +52,13 @@
             onApprove: async (data, actions) => {
               try {
                 const response = await fetch(
-                  `/orders/${data.orderID}/capture`,
+                  `/api/orders/${data.orderID}/capture`,
                   {
                     method: 'POST',
-                  }
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                  },
                 );
 
                 const details = await response.json();
@@ -55,7 +69,7 @@
 
                 //(3) Successful capture! For demo purposes:
                 console.log("Capture result", details, JSON.stringify(details, null, 2));
-                
+
                 const transaction = details.purchase_units[0].payments.captures[0];
                 alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
                 // When ready to go live, remove the alert and show a success message within this page. For example:
