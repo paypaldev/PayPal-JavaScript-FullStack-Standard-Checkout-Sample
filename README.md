@@ -35,8 +35,9 @@ In your terminal run:
 - Open the `index.html` and resplace the `test` string in the script tag with your PayPal Client ID.
 
 ### Backend
+
 - Rename the `.env.example` file to `.env`.
-- Inside of the `.env` file, enter your PayPal *client ID* for the `PAYPAL_CLIENT_ID` and your PayPal *app secret* for the `PAYPAL_APP_SECRET` enviroment variables.
+- Inside of the `.env` file, enter your PayPal _client ID_ for the `PAYPAL_CLIENT_ID` and your PayPal _app secret_ for the `PAYPAL_APP_SECRET` enviroment variables.
 - Run `npm install` in your terminal
 - Run `npm start` in your terminal
 

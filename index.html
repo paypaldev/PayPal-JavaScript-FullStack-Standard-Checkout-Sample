@@ -8,7 +8,10 @@
   <body>
     <div id="paypal-button-container"></div>
     <!-- Replace the "test" client-id value with your client-id -->
-    <script src="https://www.paypal.com/sdk/js?client-id=test&components=buttons&enable-funding=venmo,paylater" data-sdk-integration-source="integrationbuilder_ac"></script>
+    <script
+      src="https://www.paypal.com/sdk/js?client-id=test&components=buttons&enable-funding=venmo,paylater"
+      data-sdk-integration-source="integrationbuilder_ac"
+    ></script>
     <script>
       const FUNDING_SOURCES = [
         paypal.FUNDING.PAYPAL,
@@ -18,76 +21,84 @@
       ];
 
       FUNDING_SOURCES.forEach((fundingSource) => {
-        const button = paypal
-          .Buttons({
-            fundingSource,
-            style: {
-              shape: 'rect',
-              color: fundingSource === paypal.FUNDING.PAYLATER ? 'gold' : '',
-            },
-            createOrder: async (data, actions) => {
-              try {
-                const response = await fetch('/api/orders', {
+        const button = paypal.Buttons({
+          fundingSource,
+          style: {
+            shape: 'rect',
+            color: fundingSource === paypal.FUNDING.PAYLATER ? 'gold' : '',
+          },
+          createOrder: async (data, actions) => {
+            try {
+              const response = await fetch('/api/orders', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                // use the "body" param to optionally pass additional order information
+                // like product ids and quantities
+                body: JSON.stringify({
+                  cart: [
+                    {
+                      id: 'YOUR_PRODUCT_ID',
+                      quantity: 'YOUR_PRODUCT_QUANTITY',
+                    },
+                  ],
+                }),
+              });
+
+              const details = await response.json();
+              return details.id;
+            } catch (error) {
+              console.error(error);
+              // Handle the error or display an appropriate error message to the user
+            }
+          },
+          onApprove: async (data, actions) => {
+            try {
+              const response = await fetch(
+                `/api/orders/${data.orderID}/capture`,
+                {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
                   },
-                  // use the "body" param to optionally pass additional order information
-                  // like product ids and quantities
-                  body: JSON.stringify({
-                    cart: [{
-                      id: 'YOUR_PRODUCT_ID',
-                      quantity: 'YOUR_PRODUCT_QUANTITY',
-                    }]
-                  }),
-                });
+                },
+              );
 
-                const details = await response.json();
-                return details.id;
-              } catch (error) {
-                console.error(error);
-                // Handle the error or display an appropriate error message to the user
-              }
-            },
-            onApprove: async (data, actions) => {
-              try {
-                const response = await fetch(
-                  `/api/orders/${data.orderID}/capture`,
-                  {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                  },
-                );
+              const details = await response.json();
+              // Three cases to handle:
+              //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+              //   (2) Other non-recoverable errors -> Show a failure message
+              //   (3) Successful transaction -> Show confirmation or thank you message
 
-                const details = await response.json();
-                // Three cases to handle:
-                //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
-                //   (2) Other non-recoverable errors -> Show a failure message
-                //   (3) Successful transaction -> Show confirmation or thank you message
+              //(3) Successful capture! For demo purposes:
+              console.log(
+                'Capture result',
+                details,
+                JSON.stringify(details, null, 2),
+              );
 
-                //(3) Successful capture! For demo purposes:
-                console.log("Capture result", details, JSON.stringify(details, null, 2));
+              const transaction =
+                details.purchase_units[0].payments.captures[0];
+              alert(
+                `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`,
+              );
+              // When ready to go live, remove the alert and show a success message within this page. For example:
+              // var element = document.getElementById('paypal-button-container');
+              // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+              // Or go to another URL:  actions.redirect('thank_you.html');
+            } catch (error) {
+              console.error(error);
+              // Handle the error or display an appropriate error message to the user
+            }
+          },
+        });
 
-                const transaction = details.purchase_units[0].payments.captures[0];
-                alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-                // When ready to go live, remove the alert and show a success message within this page. For example:
-                // var element = document.getElementById('paypal-button-container');
-                // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                // Or go to another URL:  actions.redirect('thank_you.html');
-              } catch (error) {
-                console.error(error);
-                // Handle the error or display an appropriate error message to the user
-              }
-            },
-          });
-
-          if (button.isEligible()) {
-            button.render('#paypal-button-container');
-          } else {
-            console.log(`the "${fundingSource}" button is not eligible`);
-          }
+        if (button.isEligible()) {
+          button.render('#paypal-button-container');
+        } else {
+          console.log(`the "${fundingSource}" button is not eligible`);
+        }
       });
     </script>
   </body>
