@@ -9,23 +9,15 @@
     <div id="paypal-button-container"></div>
     <!-- Replace the "test" client-id value with your client-id -->
     <script
-      src="https://www.paypal.com/sdk/js?client-id=test&components=buttons&enable-funding=venmo,paylater"
+      src="https://www.paypal.com/sdk/js?client-id=ATcbsWeJib7eBUta2p5NaO64gvVFwIjJV2vEBu9wfP_ALWWiUtlxuo0OHxeCBsv807oldJyihRjS5AzR&components=buttons&enable-funding=venmo,paylater"
       data-sdk-integration-source="integrationbuilder_ac"
     ></script>
     <script>
-      const FUNDING_SOURCES = [
-        paypal.FUNDING.PAYPAL,
-        paypal.FUNDING.PAYLATER,
-        paypal.FUNDING.VENMO,
-        paypal.FUNDING.CARD,
-      ];
-
-      FUNDING_SOURCES.forEach((fundingSource) => {
         const button = paypal.Buttons({
-          fundingSource,
           style: {
             shape: 'rect',
-            color: fundingSource === paypal.FUNDING.PAYLATER ? 'gold' : '',
+            //color:'blue' change the default color of the buttons
+            layout: 'vertical' //default value. Can be changed to horizontal
           },
           createOrder: async (data) => {
             try {
@@ -47,6 +39,7 @@
               });
 
               const orderData = await response.json();
+              
               if (orderData.id) {
                 return orderData.id;
               } else {
@@ -112,14 +105,7 @@
               // Handle the error or display an appropriate error message to the user
             }
           },
-        });
-
-        if (button.isEligible()) {
-          button.render('#paypal-button-container');
-        } else {
-          console.log(`the "${fundingSource}" button is not eligible`);
-        }
-      });
+        }).render('#paypal-button-container');
 
       // Example function to show a result to the user. Your site's UI library can be used instead,
       // however alert() should not be used as it will interrupt the JS SDK window
