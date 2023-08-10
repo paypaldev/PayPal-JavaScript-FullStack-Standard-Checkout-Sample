@@ -8,16 +8,18 @@
   <body>
     <div id="paypal-button-container"></div>
     <!-- Replace the "test" client-id value with your client-id -->
+    <!-- Use the enable-funding and disable-funding query string params to customize which buttons are shown -->
     <script
       src="https://www.paypal.com/sdk/js?client-id=test&components=buttons&enable-funding=venmo,paylater"
       data-sdk-integration-source="integrationbuilder_ac"
     ></script>
     <script>
-        const button = paypal.Buttons({
+      paypal
+        .Buttons({
           style: {
             shape: 'rect',
             // color:'blue' change the default color of the buttons
-            layout: 'vertical' // default value. Can be changed to horizontal
+            layout: 'vertical', // default value. Can be changed to horizontal
           },
           createOrder: async (data) => {
             try {
@@ -39,7 +41,7 @@
               });
 
               const orderData = await response.json();
-              
+
               if (orderData.id) {
                 return orderData.id;
               } else {
@@ -48,13 +50,13 @@
                   ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
                   : JSON.stringify(orderData);
 
-                resultMessage(
-                  `Could not initiate PayPal Checkout...<br><br>${errorMessage}`,
-                );
+                throw new Error(errorMessage);
               }
             } catch (error) {
               console.error(error);
-              // Handle the error or display an appropriate error message to the user
+              resultMessage(
+                `Could not initiate PayPal Checkout...<br><br>${error}`,
+              );
             }
           },
           onApprove: async (data, actions) => {
@@ -83,8 +85,8 @@
                 return actions.restart();
               } else if (errorDetail) {
                 // (2) Other non-recoverable errors -> Show a failure message
-                resultMessage(
-                  `Sorry, your transaction could not be processed. <br><br>${errorDetail.description} (${orderData.debug_id})`,
+                throw new Error(
+                  `${errorDetail.description} (${orderData.debug_id})`,
                 );
               } else {
                 // (3) Successful transaction -> Show confirmation or thank you message
@@ -102,10 +104,13 @@
               }
             } catch (error) {
               console.error(error);
-              // Handle the error or display an appropriate error message to the user
+              resultMessage(
+                `Sorry, your transaction could not be processed...<br><br>${error}`,
+              );
             }
           },
-        }).render('#paypal-button-container');
+        })
+        .render('#paypal-button-container');
 
       // Example function to show a result to the user. Your site's UI library can be used instead,
       // however alert() should not be used as it will interrupt the JS SDK window
