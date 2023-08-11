@@ -37,7 +37,7 @@ In your terminal run:
 ### Backend
 
 - Rename the `.env.example` file to `.env`.
-- Inside of the `.env` file, enter your PayPal _client ID_ for the `PAYPAL_CLIENT_ID` and your PayPal _app secret_ for the `PAYPAL_APP_SECRET` enviroment variables.
+- Inside of the `.env` file, enter your PayPal _client ID_ for the `PAYPAL_CLIENT_ID` and your PayPal _app secret_ for the `PAYPAL_CLIENT_SECRET` enviroment variables.
 - Run `npm install` in your terminal
 - Run `npm start` in your terminal
 
