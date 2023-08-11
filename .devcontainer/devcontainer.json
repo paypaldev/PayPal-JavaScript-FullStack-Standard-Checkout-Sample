@@ -2,10 +2,10 @@
 {
   "name": "PayPal JavasScript FullStack Standard Checkout Sample",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "workspaceFolder": "/",
 
   // Use 'onCreateCommand' to run commands when creating the container.
-  "onCreateCommand": "bash ../.devcontainer/welcome-message.sh",
+  "onCreateCommand": "bash .devcontainer/welcome-message.sh",
 
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "npm install",
