@@ -88,7 +88,10 @@
                 throw new Error(
                   `${errorDetail.description} (${orderData.debug_id})`,
                 );
-              } else {
+              } else if (!orderData.purchase_units) {
+                throw new Error(JSON.stringify(orderData));
+              }
+              else {
                 // (3) Successful transaction -> Show confirmation or thank you message
                 // Or go to another URL:  actions.redirect('thank_you.html');
                 const transaction =
