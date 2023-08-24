@@ -24,7 +24,7 @@ This sample app shows you how to integrate PayPal into your JavasScript app for 
 
 ## Run this project
 
-### PayPal Codespaces Links
+### PayPal Codespaces
 [![Open Code In GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/docs-examples?devcontainer_path=.devcontainer%2Fdevcontainer.json)
 
 ### Locally
