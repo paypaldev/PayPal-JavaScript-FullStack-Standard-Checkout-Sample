@@ -27,7 +27,7 @@ This sample app shows you how to integrate PayPal into your JavasScript app for 
 ### PayPal Codespaces Links
 | Run this app in Codespaces on your browswer | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/docs-examples?devcontainer_path=.devcontainer%2Fdevcontainer.json)|
 
-In your terminal run:
+In your computer terminal run:
 
 `npm start` and navigate to [http://localhost:8888/](http://localhost:8888/).
 
