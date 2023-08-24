@@ -1,19 +1,23 @@
 {
-  "name": "paypal-javascript-fullstack-standard-checkout-sample",
+  "name": "paypal-standard-integration",
+  "description": "Sample Node.js web app to integrate PayPal Standard Checkout for online payments",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "server/server.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "format": "npx prettier --write *.js --single-quote"
+    "start": "nodemon server/server.js",
+    "format": "npx prettier --write **/*.{js,md}",
+    "format:check": "npx prettier --check **/*.{js,md}",
+    "lint": "npx eslint server/*.js --env=node && npx eslint client/*.js --env=browser"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "dependencies": {
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "node-fetch": "^3.3.1"
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }

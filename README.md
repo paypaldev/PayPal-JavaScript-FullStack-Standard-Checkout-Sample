@@ -24,15 +24,15 @@ This sample app shows you how to integrate PayPal into your JavasScript app for 
 
 ## Run this project
 
-You can run this project locally or inside of [Stackblitz](https://stackblitz.com/edit/paypal-js-standard-checkout-sample).
+You can run this project locally or inside of [CodeSpaces](https://stackblitz.com/edit/paypal-js-standard-checkout-sample).
 
 In your terminal run:
 
-`npm start` and navigate to [http://localhost:9597/](http://localhost:9597/).
+`npm start` and navigate to [http://localhost:8888/](http://localhost:8888/).
 
 ### Frontend
 
-- Open the `index.html` and resplace the `test` string in the script tag with your PayPal Client ID.
+- Open the `checkout.html` and resplace the `test` string in the script tag with your PayPal Client ID.
 
 ### Backend
 
