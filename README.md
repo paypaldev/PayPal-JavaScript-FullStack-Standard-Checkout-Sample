@@ -24,7 +24,8 @@ This sample app shows you how to integrate PayPal into your JavasScript app for 
 
 ## Run this project
 
-You can run this project locally or inside of [CodeSpaces](https://stackblitz.com/edit/paypal-js-standard-checkout-sample).
+### PayPal Codespaces Links
+| Run this app in Codespaces on your browswer | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/docs-examples?devcontainer_path=.devcontainer%2Fdevcontainer.json)|
 
 In your terminal run:
 

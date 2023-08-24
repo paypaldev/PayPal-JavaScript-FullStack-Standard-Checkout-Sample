@@ -3,14 +3,14 @@
 set -e
 
 WELCOME_MESSAGE="
-👋 Welcome to the \"PayPal JavasScript FullStack Standard Checkout Sample\"
+👋 Welcome to the \"PayPal Standard Checkout Integration Example\"
 
 🛠️  Your environment is fully setup with all the required software.
 
 🚀 Once you rename the \".env.example\" file to \".env\" and update \"PAYPAL_CLIENT_ID\" and \"PAYPAL_CLIENT_SECRET\", the checkout page will automatically open in the browser after the server is restarted."
 
 ALTERNATE_WELCOME_MESSAGE="
-👋 Welcome to the \"PayPal JavasScript FullStack Standard Checkout Sample\"
+👋 Welcome to the \"PayPal Standard Checkout Integration Example\"
 
 🛠️  Your environment is fully setup with all the required software.
 
