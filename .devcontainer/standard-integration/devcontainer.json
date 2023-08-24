@@ -2,7 +2,7 @@
 {
   "name": "PayPal Standard Integration",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/standard-integration",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "npm install",
   // Use 'postAttachCommand' to run commands when attaching to the container.
