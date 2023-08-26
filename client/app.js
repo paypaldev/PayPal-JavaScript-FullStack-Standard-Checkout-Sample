@@ -1,5 +1,10 @@
 window.paypal
   .Buttons({
+    style: {
+      shape: 'rect',
+      //color:'blue', change the default color of the buttons
+      layout: 'vertical', //default value. Can be changed to horizontal
+    },
     async createOrder() {
       try {
         const response = await fetch("/api/orders", {
