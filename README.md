@@ -29,7 +29,7 @@ This sample app shows you how to integrate PayPal into your JavasScript app for 
 
 ### Locally
 
-In your terminal run:
+In your terminal run: action 
 
 `npm start` and navigate to [http://localhost:8888/](http://localhost:8888/).
 
